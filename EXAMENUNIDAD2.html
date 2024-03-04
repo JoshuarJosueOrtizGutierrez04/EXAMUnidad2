@@ -23,8 +23,8 @@
             <!-- Selección de Escuela -->
             <h5>Escuela:</h5>
             <select class="controls" id="escuela" onchange="mostrarOtraEscuela(this.value)">
-                <option value="Cecytem">Cecytem</option>
-                <option value="Conalep">Conalep</option>
+                <option value="Cecytem">Conalep</option>
+                <option value="Conalep">Cecytem</option>
                 <option value="Cetmar">Cetmar</option>
                 <option value="Otra">Otra</option>
             </select><br>
@@ -40,7 +40,7 @@
             <select class="controls" id="carrera" name="carrera" onchange="mostrarOtraCarrera(this.value)">
                 <option value="Ingeniería">Ingeniería</option>
                 <option value="Medicina">Medicina</option>
-                <option value="Derecho">Derecho</option>
+                <option value="Derecho">Acuario</option>
                 <option value="otra">Otra</option>
             </select><br>
             <!-- Campo para otra Carrera (se muestra solo si se selecciona "Otra") -->
@@ -60,51 +60,60 @@
     </section>
 
     <script>
-        // Función para mostrar o ocultar el campo "Otra Escuela" dependiendo de la selección
         function mostrarOtraEscuela(value) {
-            if (value === "Otra") {
-                document.getElementById("otraEscuela").style.display = "block";
-            } else {
-                document.getElementById("otraEscuela").style.display = "none";
-            }
-        }
+    // Si el valor seleccionado es "Otra", muestra el campo de entrada para otra escuela.
+    // De lo contrario, lo oculta.
+    if (value === "Otra") {
+        document.getElementById("otraEscuela").style.display = "block";
+    } else {
+        document.getElementById("otraEscuela").style.display = "none";
+    }
+}
 
-        // Función para mostrar u ocultar el campo "Otra Carrera" dependiendo de la selección
-        function mostrarOtraCarrera(value) {
-            if (value === "otra") {
-                document.getElementById("otraCarrera").style.display = "block";
-            } else {
-                document.getElementById("otraCarrera").style.display = "none";
-            }
-        }
+function mostrarOtraCarrera(value) {
+    // Si el valor seleccionado es "otra", muestra el campo de entrada para otra carrera.
+    // De lo contrario, lo oculta.
+    if (value === "otra") {
+        document.getElementById("otraCarrera").style.display = "block";
+    } else {
+        document.getElementById("otraCarrera").style.display = "none";
+    }
+}
 
-        //  envía los datos del formulario y muestra los datos ingresados
-        function enviarFormulario() {
-            var nombre = document.getElementById("nombres").value;
-            var telefono = document.getElementById("telefono").value;
-            var correo = document.getElementById("correo").value;
-            var escuela = document.getElementById("escuela").value;
-            var carrera = document.getElementById("carrera").value;
-            if (carrera === "otra") {
-                carrera = document.getElementById("otra").value;
-            }
-            if (escuela === "Otra") {
-                escuela = document.getElementById("otraE").value;
-            }
-            document.getElementById("resultado").innerHTML = "Nombre: " + nombre + ",<br> Telefono: " + telefono + ",<br> Correo: " + correo + ",<br> Escuela: " + escuela + ",<br> Carrera: " + carrera;
-        }
+function enviarFormulario() {
+    // Recolecta los valores ingresados por el usuario.
+    var nombre = document.getElementById("nombres").value;
+    var telefono = document.getElementById("telefono").value;
+    var correo = document.getElementById("correo").value;
+    var escuela = document.getElementById("escuela").value;
+    var carrera = document.getElementById("carrera").value;
 
-        //  borra todos los campos del formulario
-        function borrarCampos() {
-            document.getElementById("nombres").value = "";
-            document.getElementById("telefono").value = "";
-            document.getElementById("correo").value = "";
-            document.getElementById("escuela").value = "Cecytem"; // Resetear el valor del select a su valor predeterminado
-            document.getElementById("otraEscuela").style.display = "none"; // Ocultar el div "otraEscuela"
-            document.getElementById("carrera").value = "Ingeniería"; // Resetear el valor del select a su valor predeterminado
-            document.getElementById("otraCarrera").style.display = "none"; // Ocultar el div "otraCarrera"
-            document.getElementById("resultado").innerHTML = ""; // Limpia lo anotado en el formulario
-        }
+    // Si el usuario seleccionó "otra" como carrera, toma el valor ingresado en el campo "otra".
+    if (carrera === "otra") {
+        carrera = document.getElementById("otra").value;
+    }
+
+    // Si el usuario seleccionó "Otra" como escuela, toma el valor ingresado en el campo "otraE".
+    if (escuela === "Otra") {
+        escuela = document.getElementById("otraE").value;
+    }
+
+    // Muestra los datos recopilados en el elemento con id "resultado".
+    document.getElementById("resultado").innerHTML = "Nombre: " + nombre + ",<br> Telefono: " + telefono + ",<br> Correo: " + correo + ",<br> Escuela: " + escuela + ",<br> Carrera: " + carrera;
+}
+
+function borrarCampos() {
+    // Restablece los valores predeterminados y limpia el formulario.
+    document.getElementById("nombres").value = "";
+    document.getElementById("telefono").value = "";
+    document.getElementById("correo").value = "";
+    document.getElementById("escuela").value = "Cecytem";
+    document.getElementById("otraEscuela").style.display = "none";
+    document.getElementById("carrera").value = "Ingeniería";
+    document.getElementById("otraCarrera").style.display = "none";
+    document.getElementById("resultado").innerHTML = "";
+}
+
     </script>
 </body>
 
